@@ -1,0 +1,39 @@
+/* AUTO-GENERATED design tokens (design_theme) — the single source of truth.
+ * Change the look by editing these values (or re-running the theme step);
+ * screens must use token classes (bg-primary, text-muted-foreground, …),
+ * never raw color values. See DESIGN-TOKENS.md for each token's contract. */
+:root {
+  --background: 0 0% 97%;
+  --foreground: 20 10% 41%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 10% 8%;
+  --muted: 20 6% 91%;
+  --muted-foreground: 20 5% 38%;
+  --primary: 18 100% 50%;
+  --primary-foreground: 0 0% 15%;
+  --accent: 20 10% 8%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 78% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 20 8% 86%;
+  --input: 20 8% 86%;
+  --ring: 18 100% 50%;
+  --radius: 6px;
+}
+[data-theme="dark"] {
+  --background: 20 8% 7%;
+  --foreground: 30 10% 56%;
+  --card: 20 8% 11%;
+  --card-foreground: 30 10% 93%;
+  --muted: 20 6% 16%;
+  --muted-foreground: 20 5% 58%;
+  --primary: 18 100% 55%;
+  --primary-foreground: 0 0% 17%;
+  --accent: 30 10% 93%;
+  --accent-foreground: 20 10% 8%;
+  --destructive: 0 78% 60%;
+  --destructive-foreground: 0 0% 10%;
+  --border: 20 6% 20%;
+  --input: 20 6% 20%;
+  --ring: 18 100% 55%;
+}

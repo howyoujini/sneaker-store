@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>SuperTony preview</title>
+    <script>
+      (function () {
+        var t = new URLSearchParams(location.search).get('theme') || 'light';
+        document.documentElement.dataset.theme = t === 'dark' ? 'dark' : 'light';
+      })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: {
+      // Full REPLACEMENT of the type scale (not extend): off-scale classes
+      // (text-4xl and larger) generate no CSS, so a screen cannot reach
+      // display sizes the ramp never defined.
+      fontSize: { 'xs': ['11px', { lineHeight: '1.5' }], 'sm': ['13px', { lineHeight: '1.5' }], 'base': ['16px', { lineHeight: '1.6' }], 'lg': ['20px', { lineHeight: '1.4', fontWeight: '500' }], 'xl': ['26px', { lineHeight: '1.25', fontWeight: '700' }], '2xl': ['36px', { lineHeight: '1.1', fontWeight: '800' }], '3xl': ['52px', { lineHeight: '1', fontWeight: '900' }] },
+      extend: { colors: {
+        border: 'hsl(var(--border) / <alpha-value>)', input: 'hsl(var(--input) / <alpha-value>)', ring: 'hsl(var(--ring) / <alpha-value>)',
+        background: 'hsl(var(--background) / <alpha-value>)', foreground: 'hsl(var(--foreground) / <alpha-value>)',
+        primary: { DEFAULT: 'hsl(var(--primary) / <alpha-value>)', foreground: 'hsl(var(--primary-foreground) / <alpha-value>)' },
+        muted: { DEFAULT: 'hsl(var(--muted) / <alpha-value>)', foreground: 'hsl(var(--muted-foreground) / <alpha-value>)' },
+        accent: { DEFAULT: 'hsl(var(--accent) / <alpha-value>)', foreground: 'hsl(var(--accent-foreground) / <alpha-value>)' },
+        card: { DEFAULT: 'hsl(var(--card) / <alpha-value>)', foreground: 'hsl(var(--card-foreground) / <alpha-value>)' },
+        destructive: { DEFAULT: 'hsl(var(--destructive) / <alpha-value>)', foreground: 'hsl(var(--destructive-foreground) / <alpha-value>)' },
+      },
+      borderRadius: { md: 'calc(var(--radius) - 4px)', lg: 'var(--radius)', xl: 'calc(var(--radius) + 4px)', '2xl': 'calc(var(--radius) + 8px)' },
+      } } };
+    </script>
+    <style>
+      html, body, #root { height: 100%; }
+      /* The page never scrolls — scrolling happens inside the device screen. */
+      body { background:#e5e7eb; margin:0; overflow:hidden; }
+      [data-screen-viewport] { scrollbar-width: none; }
+      [data-screen-viewport]::-webkit-scrollbar { display: none; }
+      /* Edge-to-edge contract: the screen's TOPMOST surface extends under the
+         status bar and pads its own content clear via .pt-safe — the way
+         production screens pad with env(safe-area-inset-*) under
+         viewport-fit=cover. If a screen forgets the class, the viewport pads
+         itself ( :has() fallback ): the header degrades to sitting below the
+         status bar, never under the clock. .pb-safe and the automatic
+         .absolute.top-0 padding were dropped — stacked with the screens' own
+         spacing they doubled the top/bottom gutters. */
+      [data-device-frame] .pt-safe { padding-top: var(--safe-top, 0px); }
+      [data-screen-viewport]:not(:has(.pt-safe)) { padding-top: var(--safe-top, 0px); }
+      /* Bottom-pinned chrome (tab bars — generated fixed bars become absolute
+         inside the frame) is padded clear of the home indicator automatically:
+         the bar's background bleeds to the edge, its content clears it. */
+      [data-device-frame] .absolute.bottom-0 { padding-bottom: var(--safe-bottom, 0px); }
+      /* Live-activity slot: visible only when the selected device has a Dynamic Island. */
+      [data-island-activity] { display: none; }
+      [data-chrome='dynamic-island'] [data-island-activity] { display: flex; }
+      /* Screen transitions: the OS-like motion that makes navigation read as a
+         real app. Drill-in slides in from the right, back from the left, a tab
+         switch cross-fades. Honours reduced-motion. */
+      @keyframes st-forward { from { transform: translateX(9%); opacity: 0 } to { transform: none; opacity: 1 } }
+      @keyframes st-back { from { transform: translateX(-9%); opacity: 0 } to { transform: none; opacity: 1 } }
+      @keyframes st-replace { from { opacity: 0 } to { opacity: 1 } }
+      [data-screen-anim='forward'] { animation: st-forward .26s cubic-bezier(.32,.72,0,1) both; }
+      [data-screen-anim='back'] { animation: st-back .26s cubic-bezier(.32,.72,0,1) both; }
+      [data-screen-anim='replace'] { animation: st-replace .2s ease both; }
+      @media (prefers-reduced-motion: reduce) {
+        [data-screen-anim] { animation: none !important; }
+      }
+    </style>
+  </head>
+  <body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body>
+</html>
